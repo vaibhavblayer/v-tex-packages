@@ -1,0 +1,162 @@
+\ProvidesPackage{v-square-equation}[2023/02/05 v1.0]
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{geometry}
+\RequirePackage{graphics}
+\RequirePackage{tzplot}
+\RequirePackage{tasks}
+\RequirePackage{amsmath}
+\RequirePackage{kinematikz}
+\RequirePackage{physunits}
+\RequirePackage[utopia]{mathdesign}
+\RequirePackage{xargs}
+\RequirePackage{v-colors}
+\pagenumbering{gobble}
+\geometry{
+	paperwidth=5 in, 
+	paperheight=5 in, 
+	top=20mm, 
+	bottom=20mm, 
+	left=10mm, 
+	right=10mm
+	}
+
+
+\newcommandx*\vtitle[2][1=title, 2=5mm, usedefault=@]{
+	\begin{center}
+		\texttt{#1}\\[#2]
+	\end{center}
+}
+
+\setlength\parindent{0pt}
+
+\tikzset{
+>=latex
+}
+
+% block (8 X 8)mm -> block
+\tikzstyle{block}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum size=8mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{pulley}=[
+	circle,
+	draw, 
+	thick, 
+	minimum size=10mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{sblock}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum size=8mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{spulley}=[
+	circle,
+	draw, 
+	thick, 
+	minimum size=8mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{lblock}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum size=12mm, 
+	node distance=1.8cm
+	]
+
+%vblock(10 X 20) -> vertical block 
+\tikzstyle{vblock}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum width=10mm, 
+	minimum height=20mm, 
+	node distance=1.8cm
+	]
+\tikzstyle{lpulley}=[
+	circle,
+	draw, 
+	thick, 
+	minimum size=12mm, 
+	node distance=2cm
+	]
+
+\tikzstyle{hblock}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum height=12mm, 
+	minimum width=20mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{Hblock}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum height=12mm, 
+	minimum width=24mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{lift}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum height=60mm, 
+	minimum width=50mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{Bpulley}=[
+	circle,
+	draw, 
+	thick, 
+	minimum size=20mm, 
+	node distance=1.8cm
+	]
+
+\tikzstyle{plank}=[
+	rectangle,
+	draw, 
+	thick, 
+	minimum height=8mm, 
+	minimum width=50mm, 
+	node distance=1.8cm
+	]
+
+
+%%fplatform -> fill platform
+\tikzstyle{fplatform}=[
+	rectangle, 
+	draw, 
+	thick, 
+	fill, 
+	minimum height=4mm, 
+	minimum width=30mm, 
+	node distance=0mm, 
+	pattern=north east lines
+	]
+
+%%platform -> platform
+\tikzstyle{platform}=[
+	rectangle, 
+	draw, 
+	fill, 
+	minimum height=4mm, 
+	minimum width=30mm, 
+	node distance=0mm
+	]
+
+
+\endinput
