@@ -14,11 +14,31 @@
 \RequirePackage{minted}
 
 
-\newcommandx*\vtitle[2][1=title, 2=5mm, usedefault=@]{
-	\begin{center}
-		\texttt{#1}\\[#2]
-	\end{center}
-}
+\newcommandx*\vtitle[2][1=Option,2=2mm, usedefault=@]{
+\begin{center}
+    #1\\[#2]
+\end{center}}
+
+
+\newcommandx*\vproblem[3][1=Q, 2=B, 3=2022, usedefault=@]{
+    \begin{minipage}{.1\textwidth}
+	\centering
+	{\textbf{\Huge{Q.\\[2 mm]#1}}}
+    \end{minipage}%
+    \begin{minipage}{0.9\textwidth}
+	#2 \linebreak $~$\hfill [ IIT-JEE \quad #3 ]
+\end{minipage}}
+
+
+\newcommandx*\voption[2][1=Option, 2=0.15, usedefault=@]{
+    \begin{minipage}{#2\textwidth}
+	\centering
+	{\textbf{\Huge{ }}}
+    \end{minipage}%
+    \begin{minipage}{\textwidth-#2\textwidth}
+	#1
+\end{minipage}}
+
 
 \setlength\parindent{0pt}
 
