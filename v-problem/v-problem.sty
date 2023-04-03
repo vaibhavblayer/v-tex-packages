@@ -14,6 +14,17 @@
 \RequirePackage{minted}
 
 
+\newcommandx*\vgeometry[6][1=5, 2=5, 3=10, 4=10, 5=10, 6=10, usedefault=@]{
+    \geometry{
+	paperwidth=#1 in,
+	paperheight=#2 in,
+	top=#3 mm,
+	bottom=#4 mm,
+	left=#5 mm,
+	right=#6 mm
+    }
+}
+
 \newcommandx*\vtitle[2][1=Option,2=2mm, usedefault=@]{
 \begin{center}
     #1\\[#2]
@@ -45,6 +56,45 @@
 \tikzset{
 >=latex
 }
+
+
+
+\tikzstyle{qnumber}=[
+	rectangle,
+	inner sep=0.25mm,
+	]
+	
+\tikzstyle{format}=[
+	rectangle,
+	inner sep=0.25mm,
+	anchor=north east
+	]
+	
+\tikzstyle{question}=[
+	rectangle, 
+	inner sep=0.25mm,
+	text width=\paperwidth-30mm,
+	anchor=west, 
+	]
+	
+\tikzstyle{option}=[
+	rectangle, 
+	inner sep=0 mm,
+	text width=\paperwidth-30mm,
+	anchor=north, 
+	]
+
+\tikzstyle{diagram}=[
+	rectangle,
+	inner sep=0 mm,
+	text width=\paperwidth-30mm,
+	anchor=north,
+	]	
+
+\tikzstyle{divider}=[
+	line width=1mm, 
+	Fast Round-Fast Round
+	]
 
 % block (8 X 8)mm -> block
 \tikzstyle{block}=[

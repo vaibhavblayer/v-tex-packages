@@ -11,13 +11,39 @@
 \RequirePackage{xargs}
 \RequirePackage{v-colors}
 \pagenumbering{gobble}
-\RequirePackage{minted}
+%\RequirePackage{minted}
+\RequirePackage{annotate-equations}
+\RequirePackage{qrcode}
+\usetikzlibrary{shadings}
+\RequirePackage{hyperref}
+\RequirePackage{mathtools}
+\hypersetup{
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    linkbordercolor=1 1 1,
+    urlbordercolor=1 1 1,
+    pdfborder=0 0 0,
+}
 
 
-\newcommandx*\vtitle[2][1=title, 2=5mm, usedefault=@]{
+\newcommandx*\vgeometry[6][1=5, 2=5, 3=10, 4=10, 5=10, 6=10, usedefault=@]{
+    \geometry{
+	paperwidth=#1 in,
+	paperheight=#2 in,
+	top=#3 mm,
+	bottom=#4 mm,
+	left=#5 mm,
+	right=#6 mm
+    }
+}
+
+
+\newcommandx*\vtitle[1][1=title, usedefault=@]{
 	\begin{center}
-		\texttt{#1}\\[#2]
+		\texttt{#1}
 	\end{center}
+	\vspace*{\fill}
 }
 
 \setlength\parindent{0pt}
