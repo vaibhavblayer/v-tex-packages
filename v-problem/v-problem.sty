@@ -11,8 +11,23 @@
 \RequirePackage{xargs}
 \RequirePackage{v-colors}
 \pagenumbering{gobble}
-\RequirePackage{minted}
+%\RequirePackage{minted}
 
+\RequirePackage{qrcode}
+\usetikzlibrary{shadings}
+\RequirePackage{hyperref}
+\RequirePackage{mathtools}
+\hypersetup{
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    linkbordercolor=1 1 1,
+    urlbordercolor=1 1 1,
+    pdfborder=0 0 0,
+}
+
+\newcommand{\ans}{\textcolor{PINKD}{\textit{\quad Ans.}}}
+\def\d#1{d\!#1}
 
 \newcommandx*\vgeometry[6][1=5, 2=5, 3=10, 4=10, 5=10, 6=10, usedefault=@]{
     \geometry{
