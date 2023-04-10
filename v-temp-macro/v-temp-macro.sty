@@ -1,0 +1,32 @@
+\ProvidesPackage{v-temp-macro}
+
+
+\RequirePackage{xparse}
+\RequirePackage{expl3}
+\RequirePackage{tikz}
+   
+
+\ExplSyntaxOn 
+\NewDocumentEnvironment{assemble}
+{ O{P} +b }
+{
+\str_const:Nn \l_my_str {S}
+\str_const:Nn \l_myy_str {#1}
+\str_if_eq:NNTF \l_my_str \l_myy_str
+
+	{
+		\begin{tikzpicture}
+		\def\C{GREENA}
+		#2
+		\end{tikzpicture}		
+	} 
+	{
+		\begin{tikzpicture}
+		\def\C{PINKA}
+		#2
+		\end{tikzpicture}	
+	}
+} {}
+\ExplSyntaxOff
+
+\endinput
