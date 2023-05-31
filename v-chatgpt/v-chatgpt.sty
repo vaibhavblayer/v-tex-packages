@@ -1,4 +1,4 @@
-\ProvidesPackage{v-equation}[2023/02/05 v1.0]
+\ProvidesPackage{v-chatgpt}[2023/04/13 v1.0]
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{geometry}
 \RequirePackage{graphics}
@@ -18,8 +18,8 @@
 \usetikzlibrary{shadings}
 \RequirePackage{hyperref}
 \RequirePackage{mathtools}
-\RequirePackage{upgreek}
-\RequirePackage[shortconst]{physconst}
+
+
 \hypersetup{
     linkcolor=blue,
     filecolor=magenta,      
@@ -30,7 +30,7 @@
 }
 
 \def\d#1{d\!#1}
-\newcommandx*\vgeometry[6][1=5, 2=5, 3=10, 4=10, 5=10, 6=10, usedefault=@]{
+\newcommandx*\vgeometry[6][1=5, 2=5, 3=10, 4=15, 5=10, 6=10, usedefault=@]{
     \geometry{
 	paperwidth=#1 in,
 	paperheight=#2 in,
@@ -40,6 +40,15 @@
 	right=#6 mm
     }
 }
+
+\vgeometry
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{\texttt{\tiny\textcolor{black!20}{RENDERED USING GPT3.5}}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
 
 
 \newcommandx*\vtitle[1][1=title, usedefault=@]{

@@ -4,7 +4,9 @@
 \RequirePackage{xparse}
 \RequirePackage{expl3}
 \RequirePackage{tikz}
-   
+\RequirePackage{enumitem} 
+\RequirePackage{numerica} 
+\RequirePackage{calculator} 
 
 \ExplSyntaxOn 
 \NewDocumentEnvironment{assemble}
@@ -14,7 +16,17 @@
 \str_const:Nn \l_myy_str {#1}
 \str_if_eq:NNTF \l_my_str \l_myy_str
 
-	{
+	{\begin{tikzpicture}[remember~picture, overlay]
+		\tzcoor($(current~page.north)!0.5!(current~page.south)$)(O)
+		\node[inner~sep=2pt] (s) at (O)[scale=1.8, GREENA]{\texttt{Solution}};
+		%\tzline[line~width=0.6mm, GREENA](s.north~east)(s.south~east)
+		%\tzline+[->>, line~width=0.6mm, GREENA](s.east)(1, 0)
+		\node[circle, fill=GREENA, inner~sep=0.5mm] 
+			[right=0.5mm~of~s]{\textcolor{white}{\boldmath{$>$}}};
+		\node[circle, fill=GREENA, inner~sep=0.5mm] 
+			[left=0.5mm~of~s]{\textcolor{white}{\boldmath{$>$}}};
+	\end{tikzpicture}
+
 		\begin{tikzpicture}
 		\def\C{GREENA}
 		#2
