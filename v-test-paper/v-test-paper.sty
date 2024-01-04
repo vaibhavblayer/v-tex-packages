@@ -2,11 +2,15 @@
 
 \RequirePackage{geometry}
 \RequirePackage{graphics}
-\RequirePackage{tzplot}
+%\RequirePackage{tzplot}
 \RequirePackage{tasks}
 \RequirePackage{amsmath}
 \RequirePackage{kinematikz}
+\RequirePackage{upgreek}
+\RequirePackage{v-tzplot}
 \RequirePackage{physunits}
+\RequirePackage{multicol}
+\RequirePackage{circuitikz}
 \RequirePackage[utopia]{mathdesign}
 \geometry{a4paper, top=15mm, bottom=20mm, left=20mm, right=20mm}
 
@@ -14,6 +18,49 @@
 \newcommand{\ans}{\textcolor{red!95}{\textit{\quad Ans.}}}
 \def\ansit#1{\textcolor{red!95}{\quad [ #1 ]}}
 \def\ansint#1{\textcolor{red!95}{\quad [ #1 ]}}
+
+
+\DeclareRobustCommand{\units@separator}{\;}
+\DeclareRobustCommand{\ml}[1][ ]{\ensuremath{% 
+\expandafter\units@separator\mathrm{#1 ml}}}
+
+\DeclareRobustCommand{\rad}[1][ ]{\ensuremath{% 
+\expandafter\units@separator\mathrm{#1 rad}}}
+
+
+
+\DeclareRobustCommand{\units@separator}{\;}
+
+\DeclareRobustCommand{\kOhm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{k\,\Omega}}}
+
+\DeclareRobustCommand{\Ohm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\Omega}}}
+
+\DeclareRobustCommand{\A}{\ensuremath{% 
+\expandafter\units@separator\mathrm{A}}}
+
+\DeclareRobustCommand{\mA}{\ensuremath{% 
+\expandafter\units@separator\mathrm{m\,A}}}
+
+\DeclareRobustCommand{\T}{\ensuremath{% 
+\expandafter\units@separator\mathrm{T}}}
+
+\DeclareRobustCommand{\mF}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\upmu\,F}}}
+
+\DeclareRobustCommand{\H}{\ensuremath{%
+\expandafter\units@separator\mathrm{H}}}
+
+\DeclareRobustCommand{\kV}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,V}}}
+
+\DeclareRobustCommand{\mm}{\ensuremath{%
+\expandafter\units@separator\mathrm{mm}}}
+
+\DeclareRobustCommand{\kW}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,W}}}
+
 
 \newcommand{\jeeSectionA}{
 	\begin{center}
@@ -70,7 +117,7 @@
 	\end{center}
 }
 
-
+\def\d#1{d\!#1}
 
 
 \tikzstyle test-paper=[>=latex, thick]
