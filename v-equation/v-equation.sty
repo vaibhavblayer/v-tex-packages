@@ -59,7 +59,37 @@
 
 }
 
+\DeclareRobustCommand{\units@separator}{\;}
 
+\DeclareRobustCommand{\kOhm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{k\,\Omega}}}
+
+\DeclareRobustCommand{\Ohm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\Omega}}}
+
+\DeclareRobustCommand{\A}{\ensuremath{% 
+\expandafter\units@separator\mathrm{A}}}
+
+\DeclareRobustCommand{\mA}{\ensuremath{% 
+\expandafter\units@separator\mathrm{m\,A}}}
+
+\DeclareRobustCommand{\T}{\ensuremath{% 
+\expandafter\units@separator\mathrm{T}}}
+
+\DeclareRobustCommand{\mF}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\upmu\,F}}}
+
+\DeclareRobustCommand{\H}{\ensuremath{%
+\expandafter\units@separator\mathrm{H}}}
+
+\DeclareRobustCommand{\kV}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,V}}}
+
+\DeclareRobustCommand{\mm}{\ensuremath{%
+\expandafter\units@separator\mathrm{mm}}}
+
+\DeclareRobustCommand{\kW}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,W}}}
 
 \newcommandx*\vtitle[1][1=title, usedefault=@]{
 	\begin{center}

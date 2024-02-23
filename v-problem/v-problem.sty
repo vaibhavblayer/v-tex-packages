@@ -12,8 +12,10 @@
 \RequirePackage{xargs}
 \RequirePackage{v-colors}
 \RequirePackage{upgreek}
+\RequirePackage{circuitikz}
 \RequirePackage[shortconst]{physconst}
 \pagenumbering{gobble}
+\RequirePackage{multicol}
 
 %\RequirePackage{minted}
 
@@ -70,12 +72,62 @@
 \end{minipage}}
 
 
+\DeclareRobustCommand{\units@separator}{\;}
+\DeclareRobustCommand{\ml}[1][ ]{\ensuremath{% 
+\expandafter\units@separator\mathrm{#1 ml}}}
+
+\DeclareRobustCommand{\rad}[1][ ]{\ensuremath{% 
+\expandafter\units@separator\mathrm{#1 rad}}}
+
+
+
+\DeclareRobustCommand{\units@separator}{\;}
+
+\DeclareRobustCommand{\kOhm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{k\,\Omega}}}
+
+\DeclareRobustCommand{\Ohm}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\Omega}}}
+
+\DeclareRobustCommand{\A}{\ensuremath{% 
+\expandafter\units@separator\mathrm{A}}}
+
+\DeclareRobustCommand{\mA}{\ensuremath{% 
+\expandafter\units@separator\mathrm{m\,A}}}
+
+\DeclareRobustCommand{\T}{\ensuremath{% 
+\expandafter\units@separator\mathrm{T}}}
+
+\DeclareRobustCommand{\mF}{\ensuremath{% 
+\expandafter\units@separator\mathrm{\upmu\,F}}}
+
+\DeclareRobustCommand{\H}{\ensuremath{%
+\expandafter\units@separator\mathrm{H}}}
+
+\DeclareRobustCommand{\kV}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,V}}}
+
+\DeclareRobustCommand{\mm}{\ensuremath{%
+\expandafter\units@separator\mathrm{mm}}}
+
+\DeclareRobustCommand{\kW}{\ensuremath{%
+\expandafter\units@separator\mathrm{k\,W}}}
+
+
 \setlength\parindent{0pt}
 
 \tikzset{
 >=latex
 }
 
+
+\ctikzset{
+	resistors/scale=0.6,
+	capacitors/scale=0.6,
+	inductors/scale=0.6,
+	diodes/scale=0.6,
+	transistors/scale=0.6,
+}
 
 
 \tikzstyle{qnumber}=[
