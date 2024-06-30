@@ -1,0 +1,443 @@
+\ProvidesPackage{v-tzplot}[2023/04/09 v2.1 Plot Graphs with TikZ Abbreviations]
+
+
+%%%%% defaults
+
+%%%%% basic defaults
+
+%% circle dot (using radius)
+\def\tz@default@Cdot@radius{1.2pt}                     % fixed
+\def\tz@initial@Cdot@radius{\tz@default@Cdot@radius}   % changeable
+\NewDocumentCommand\settzcdotradius{m}{\renewcommand\tz@initial@Cdot@radius{#1}}
+\newcommand\tzCdotradius{\tz@initial@Cdot@radius}
+
+%% node dot (using minimum size: diameter)
+\def\tz@default@dot@size{2.4pt}                        % fixed
+\def\tz@initial@dot@size{\tz@default@dot@size}         % changeable
+\NewDocumentCommand\settzdotsize{m}{\renewcommand\tz@initial@dot@size{#1}}
+\newcommand\tzdotsize{\tz@initial@dot@size}
+
+%% mark (using mark size: radius)            % tikz initial = 2pt
+\def\tz@default@mark@size{2pt}                         % fixed 
+\def\tz@initial@mark@size{\tz@default@mark@size}       % changeable
+\NewDocumentCommand\settzmarksize{m}{\renewcommand\tz@initial@mark@size{#1}}
+\newcommand\tzmarksize{\tz@initial@mark@size}
+
+%% opacity
+\def\tz@default@fill@opacity{0.3}                      % fixed
+\def\tz@initial@fill@opacity{\tz@default@fill@opacity} % changeable
+\NewDocumentCommand\settzfillopacity{m}{\renewcommand\tz@initial@fill@opacity{#1}}
+\newcommand\tzfillopacity{\tz@initial@fill@opacity}
+
+%% fillcolor
+\def\tz@default@fill@color{black!50}                   % fixed
+\def\tz@initial@fill@color{\tz@default@fill@color}     % changeable
+\NewDocumentCommand\settzfillcolor{mg}
+{%
+  \renewcommand\tz@initial@fill@color{#1}
+  \IfValueT {#2} {\renewcommand\tz@initial@fill@opacity{#2}}
+}
+\newcommand\tzfillcolor{\tz@initial@fill@color}
+
+%% link style
+\def\tz@default@link@style{to}                         % fixed
+\def\tz@initial@link@style{\tz@default@link@style}     % changeable
+\NewDocumentCommand\settzlinkstyle{m}{\renewcommand\tz@initial@link@style{#1}}
+\newcommand\tzlinkstyle{\tz@initial@link@style}
+
+\let\tzpathstyle\tzlinkstyle
+\let\settzpathstyle\settzlinkstyle
+
+%%% path style
+%\def\tz@default@path@style{to}                         % fixed
+%\def\tz@initial@path@style{\tz@default@path@style}     % changeable
+%\NewDocumentCommand\settzpathstyle{m}{\renewcommand\tz@initial@path@style{#1}}
+%\newcommand\tzpathstyle{\tz@initial@path@style}
+
+
+
+
+%%%%% layers: defaults
+
+%% tzpath layer %% default: main
+\def\tz@default@tzpath@layer{main}                       % fixed
+\def\tz@initial@tzpath@layer{\tz@default@tzpath@layer}   % changeable
+\NewDocumentCommand\settzpathlayer{m}
+  {\renewcommand\tz@initial@tzpath@layer{#1}}
+\newcommand\tzpathlayer{\tz@initial@tzpath@layer}
+%% (there is No \tz-link-layer thing)
+
+%% tzfnArea layer %% default: main
+\def\tz@default@tzfnArea@layer{behind}                     % fixed
+\def\tz@initial@tzfnArea@layer{\tz@default@tzfnArea@layer} % changeable
+\NewDocumentCommand\settzfnArealayer{m}
+  {\renewcommand\tz@initial@tzfnArea@layer{#1}}
+\newcommand\tzfnArealayer{\tz@initial@tzfnArea@layer}
+
+%% tzfnarea layer %% default: main
+\def\tz@default@tzfnarea@layer{behind}                     % fixed
+\def\tz@initial@tzfnarea@layer{\tz@default@tzfnarea@layer} % changeable
+\NewDocumentCommand\settzfnarealayer{m}
+  {\renewcommand\tz@initial@tzfnarea@layer{#1}}
+\newcommand\tzfnarealayer{\tz@initial@tzfnarea@layer}
+
+%% tangent layer
+\def\tz@default@tangent@layer{behind}                    % fixed
+\def\tz@initial@tangent@layer{\tz@default@tangent@layer} % changeable
+\NewDocumentCommand\settztangentlayer{m}
+  {\renewcommand\tz@initial@tangent@layer{#1}}
+\newcommand\tztangentlayer{\tz@initial@tangent@layer}
+
+\let\tztangentatlayer\tztangentlayer
+\let\settztangentatlayer\settztangentlayer
+
+
+%% angle layer
+\def\tz@default@angle@layer{behind}                      % fixed
+\def\tz@initial@angle@layer{\tz@default@angle@layer}     % changeable
+\NewDocumentCommand\settzanglelayer{m}
+  {\renewcommand\tz@initial@angle@layer{#1}}
+\newcommand\tzanglelayer{\tz@initial@angle@layer}
+
+\let\tzanglemarklayer\tzanglelayer
+\let\settzanglemarklayer\settzanglelayer
+
+
+
+
+%% tzdot (for node dot style)
+\tikzset{
+  tzdot/.style=
+    {draw,solid,thick,circle,inner sep=0pt,minimum size=#1},
+  tzdot/.default=\tzdotsize
+}
+
+%% tzdot options (for node dot style)
+\tikzset{
+  tzdot options/.style={tzdot=\tzdotsize,#1}
+}
+
+
+%% tzmark
+\tikzset{
+  tzmark/.style=
+    {mark options={solid,thick},mark size=#1},
+  tzmark/.default=\tzmarksize
+}
+
+%% tznode (NOT USED!) -- user choice
+\tikzset{
+  tznode/.style=
+    {solid,thin,circle,inner sep=0pt,minimum size=#1},
+  tznode/.default=0pt
+}
+
+%% tzdotted
+\tikzset{%
+  tzdotted/.style={%
+    dotted=none,
+    line cap=round,
+    dash pattern=on 0pt off 1cm/(#1)
+  },
+  tzdotted/.default=10
+}
+
+%% tzdashed
+\tikzset{
+  tzdashed/.style={%
+    dashed=none,
+    dash pattern=on 5mm/(#1) off 5mm/(#1)
+  },
+  tzdashed/.default=10
+}
+
+
+
+\ExplSyntaxOn
+%%=====================================================
+
+%% semicolon versions
+\msg_new:nnn { tzplot } { semicolon-error } 
+             { You~may~have~forgotten~a~semicolon~here~or~above! }
+
+%% infinite slope error: LFn related macros
+\msg_new:nnn { tzplot } { infinite~slope~error } 
+             { Perhaps~you~are~trying~an~'infinite~slope'~here~or~above! }
+
+
+%%%% string replacement
+%%%%%% to use string replacement for label positions
+\cs_new:Npn \extract_posopt:w [ #1 ] #2 \q_stop  % ndh
+{
+	\tl_set:Nn \l_label_pos_str_tl { [ \exp_not:n { #1 } ] } % \exp_not needed!!!
+	
+	\tl_set:Nx \l_label_pos_str_trimmed_tl { \tl_trim_spaces:n { #2 } }
+	
+    \str_case_e:nnF { \l_label_pos_str_trimmed_tl }
+    {
+      {l} { \tl_put_right:Nn \l_label_pos_str_tl {left} }
+      {r} { \tl_put_right:Nn \l_label_pos_str_tl {right} }
+      {a} { \tl_put_right:Nn \l_label_pos_str_tl {above} }
+      {b} { \tl_put_right:Nn \l_label_pos_str_tl {below} }
+      {c} { \tl_put_right:Nn \l_label_pos_str_tl {center} }
+      {al} { \tl_put_right:Nn \l_label_pos_str_tl {above~left} }
+      {ar} { \tl_put_right:Nn \l_label_pos_str_tl {above~right} }
+      {bl} { \tl_put_right:Nn \l_label_pos_str_tl {below~left} }
+      {br} { \tl_put_right:Nn \l_label_pos_str_tl {below~right} }
+	}
+	{
+		\tl_put_right:Nn \l_label_pos_str_tl { #2 }
+	}
+}
+
+
+
+
+%%% --- end of \tzgetxyval
+
+%%%%%% \tzgetxyval (experimental)
+%%%%%% seems not working
+%\NewDocumentCommand\tzgetxyval{ g r() m m }
+%{
+%  \IfNoValueTF { #1 }
+%  {
+%    \def\tzptToDim{28.45274} % cm: default
+%  }
+%  {
+%    \str_case:nnTF { #1 } 
+%    {
+%      {pt} { \def\tzptToDim{1} }
+%      {mm} { \def\tzptToDim{2.845274} }
+%      {cm} { \def\tzptToDim{28.45274} }
+%      {bp} { \def\tzptToDim{1.00374} }
+%      {dd} { \def\tzptToDim{1.07} }
+%      {pc} { \def\tzptToDim{12} }
+%      {in} { \def\tzptToDim{72.26999} }
+%    }
+%    {
+%      \def\tzptToDim{1} % default unit in tikz
+%    }
+%  }
+%  \tikz@scan@one@point\pgfutil@firstofone(#2)\relax%
+%  \pgfmathparse{\the\pgf@x/\tzptToDim}% convert pt to dim
+%  \edef#3{\pgfmathresult}%
+%  \pgfmathparse{\the\pgf@y/\tzptToDim}% convert pt to dim
+%  \edef#4{\pgfmathresult}%
+%}
+%
+%%%% --- end of \tzgetxyval
+
+
+
+%%% \tzline (main)
+\NewDocumentCommand\tzline{ s t+ o d<> d"" }
+{
+  \tl_clear:N \l_tzline_cmd_tl
+
+  \IfBooleanTF { #1 } % (*) or not (NOT USED!)
+  { \bool_set_true:N \l_tmpa_bool }
+  { \bool_set_false:N \l_tmpa_bool }
+
+  \IfBooleanTF { #2 } % (+) or not
+  { \bool_set_true:N \l_tmpb_bool }
+  { \bool_set_false:N \l_tmpb_bool }
+
+  \IfValueTF { #4 }
+  {
+    \tl_set:Nn \l_tzline_shift_coor_tl { #4 } 
+    \bool_set_true:N \l_tzline_shift_coor_bool
+  }
+  { 
+    \tl_clear:N \l_tzline_shift_coor_tl 
+    \bool_set_false:N \l_tzline_shift_coor_bool
+  }
+
+  \IfValueTF { #3 }
+  { \tl_set:Nn \l_tzline_opt_tl { #3 } }
+  { \tl_clear:N \l_tzline_opt_tl }
+
+  \IfValueTF { #5 }
+  { \tl_set:Nn \l_tzline_namepath_tl { name~path = #5 } }
+  { \tl_clear:N \l_tzline_namepath_tl }
+
+  \tzline_check_token:n
+}
+
+\cs_new:Npn \tzline_check_token:n #1
+{
+  \str_if_eq:nnT { #1 } { ( }
+    { \tzline_sub_fn ( }
+%  \tzline_stop_action
+}
+
+%% structure: (coorA) -- node [pos] {text} (coorB) node [pos] {text}
+\NewDocumentCommand\tzline_sub_fn{ r() +G{} O{} d<> r() +G{} O{} D<>{} }
+{
+  % determine connect line STYLE
+  \tl_set:Nn \l_tzline_STYLE_A_tl { -- }
+  \IfValueTF { #4 }
+  {
+    \tl_set:Nn \l_tzline_STYLE_C_tl { #4 }
+  }
+  {
+    \bool_if:NTF \l_tmpb_bool
+      { \tl_set:Nn \l_tzline_STYLE_C_tl { ++ } }
+      { \tl_set:Nn \l_tzline_STYLE_C_tl {    } }
+  }
+  % insert connect line STYLE
+  \bool_if:NTF \l_tzline_shift_coor_bool
+  {% if shift
+    \tl_put_right:Nx \l_tzline_cmd_tl 
+    { ([ shift = { (\l_tzline_shift_coor_tl) } ]#1) }
+  }
+  {% no shift (normal)
+    \tl_put_right:Nn \l_tzline_cmd_tl { (#1) } 
+  }
+  
+  \tl_put_right:No \l_tzline_cmd_tl  % once
+    {
+      \l_tzline_STYLE_A_tl %% just --
+    }
+  \tl_put_right:Nn \l_tzline_cmd_tl
+    {
+      ~ node [ above , #3 ] { #2 }
+    }
+  \tl_put_right:No \l_tzline_cmd_tl  % once
+    {
+      \l_tzline_STYLE_C_tl
+    }
+  \bool_if:NTF \l_tmpb_bool
+  {% if ++
+    \tl_put_right:Nn \l_tzline_cmd_tl { (#5) }
+  }
+  {% no ++
+    \bool_if:NTF \l_tzline_shift_coor_bool
+    {% if shift
+      \tl_put_right:Nx \l_tzline_cmd_tl 
+      { ([ shift = { (\l_tzline_shift_coor_tl) } ]#5) } 
+    }
+    {% no shift (normal)
+      \tl_put_right:Nn \l_tzline_cmd_tl { (#5) } 
+    }
+  }
+
+  \tl_put_right:Nn \l_tzline_cmd_tl
+    { node [ #7 ] { #6 } }
+  % add at begin/end
+  \bool_if:NT \g_tzline_BEGIN_cmd_bool
+    { \tl_put_left:Nx \l_tzline_cmd_tl { \g_tzline_BEGIN_cmd_tl } }
+  \bool_if:NT \g_tzline_END_cmd_bool
+    { \tl_put_right:Nx \l_tzline_cmd_tl { \g_tzline_END_cmd_tl } }
+
+  % final action
+  \tl_put_left:No \l_tzline_cmd_tl
+  { 
+    \l_tzline_opt_tl ] % expand `once'
+  }
+
+  \tl_put_left:Nx \l_tzline_cmd_tl
+      { [ \l_tzline_namepath_tl , }
+
+  \exp_last_unbraced:Nf \draw \l_tzline_cmd_tl #8 ;
+
+  \bool_gset_false:N \g_tzline_BEGIN_cmd_bool
+  \bool_gset_false:N \g_tzline_END_cmd_bool
+%  \tl_clear:N \g_tzline_BEGIN_cmd_tl
+%  \tl_clear:N \g_tzline_END_cmd_tl
+}
+
+%%% --- end of \tzline
+
+
+
+
+\tikzset
+{ --o-- /.style =
+  { 
+    decoration =
+    {
+      markings ,
+      mark = at~position~ #1 ~with~ 
+             { 
+%               \exp_last_unbraced:NNo \arrow [ \tzmidarrowopt ] { o } 
+                \exp_last_unbraced:NNf
+                  \draw [ \tzmidarrowopt ] (0,0) circle (1.2pt) ;
+             } 
+    } ,
+    postaction = {decorate}
+  } ,
+  --o-- /.default = .5 % istgame: .55
+}
+
+\tikzset
+{ --x-- /.style =
+  { 
+    decoration = 
+    {
+      markings ,
+      mark 
+      = at~position~ #1 ~with~ 
+        {  % use the option tzextend{2pt}{2pt} to change lenghts
+          \exp_last_unbraced:NNo 
+            \draw [ \tzmidarrowopt ] (2pt,2pt) to (-2pt,-2pt) ; 
+          \exp_last_unbraced:NNo
+            \draw [ \tzmidarrowopt ] (-2pt,2pt) to (2pt,-2pt) ;
+        }
+    } ,
+    postaction = {decorate}
+  } ,
+  --x-- /.default = .5
+}
+
+\tikzset
+{ --/-- /.style =
+  { 
+    decoration = 
+    {
+      markings ,
+      mark 
+      = at~position~ #1 ~with~ 
+        {  % use the option tzextend{2pt}{2pt} to change lenghts
+          \exp_last_unbraced:NNo 
+            \draw [ \tzmidarrowopt ] (2pt,2pt) to (-2pt,-2pt) ; 
+%          \exp_last_unbraced:NNo
+%            \draw [ \tzmidarrowopt ] (-2pt,2pt) to (2pt,-2pt) ;
+        }
+    } ,
+    postaction = {decorate}
+  } ,
+  --/-- /.default = .5
+}
+
+
+%=====================================================
+%=====================================================
+\ExplSyntaxOff
+%=====================================================
+%=====================================================
+
+
+%%% mixed NE
+
+% tzEu
+\NewDocumentCommand\TzEu{D(){LFname}O{}mmD<>{\tmpB}O{right}G{}}
+{
+\def\tmpEu{(#3-#4)*\x+#4}
+\def\tmpB{#3} %???
+\draw [name path=#1,#2] (0,#4) node [left] {#4} plot [domain=0:1] (\x,{\tmpEu}) node [right] {#5} node [#6] {#7};
+}
+
+% tzEu
+%\NewDocumentCommand\TzEu{D(){LFname}O{}mmD<>{\tmpB}O{right}G{}}
+\NewDocumentCommand\TzEU { O{} D""{} m m D[.{0} D.]{1} D<>{\tmpB} O{right} G{} }
+{
+\def\tmpEU{(#3-#4)*\x+#4}
+\def\tmpB{#3} %???
+%\draw [name path=#1,#2] (0,#4) node [left] {#4} plot [domain=0:1] (\x,{\tmpEu}) node [right] {#5} node [#6] {#7};
+\Tzfn [#1]"#2"{\tmpEU}[{#5}..{#6}]
+\path (0,#4) node [left] {#4} plot [domain=0:1] (\x,{\tmpEU}) node [right] {#7} node [#8] {#9};
+}
+
+
+\endinput
+
