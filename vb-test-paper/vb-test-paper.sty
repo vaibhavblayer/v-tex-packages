@@ -1,6 +1,5 @@
 \ProvidesPackage{v-test-paper}[2023/01/09 v1.0]
 
-\RequirePackage{geometry}
 \RequirePackage{graphics}
 %\RequirePackage{tzplot}
 \RequirePackage{tasks}
@@ -14,8 +13,8 @@
 \RequirePackage[utopia]{mathdesign}
 \RequirePackage{enumitem}
 \usepgflibrary{easing}
-\geometry{a4paper, top=15mm, bottom=20mm, left=20mm, right=20mm}
 \RequirePackage{mathtools}
+\usetikzlibrary{optics}
 
 \newcommand{\ans}{\textcolor{red!95}{\textit{\quad Ans.}}}
 \def\ansit#1{\textcolor{red!95}{\quad [ #1 ]}}
@@ -169,9 +168,7 @@
 \tikzstyle{Bpulley}=[circle,draw, thick, minimum size=20mm, node distance=1.8cm]
 
 \tikzstyle{plank}=[rectangle,draw, thick, minimum height=8mm, minimum width=50mm, node distance=1.8cm]
-\tikzset{
-    spring/.style = {thick, decorate, decoration={coil, aspect=0.45, segment length=5pt, amplitude=5pt, pre length=10pt, post length=7pt}}
-}
+
 
 %%fplatform -> fill platform
 \tikzstyle{fplatform}=[rectangle, draw, thick, fill, minimum height=4mm, minimum width=30mm, node distance=0mm, pattern=north east lines]

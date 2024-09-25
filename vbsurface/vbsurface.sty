@@ -1,0 +1,375 @@
+\ProvidesPackage{vbsurface}[2024/06/23 v1.0 Custom circle drawing commands]
+
+\RequirePackage{tikz}
+\RequirePackage{xparse}
+\usetikzlibrary{fadings}
+\RequirePackage{v-tzplot}
+
+\ExplSyntaxOn
+
+
+%% VBSURFACE %%
+
+\keys_define:nn { vbsurface }
+{
+    hatch_height .tl_set:N = \l_vbsurface_hatch_height_tl,
+
+}
+
+\NewDocumentCommand{\vbsurface}{s O{} O{} r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurface } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurface_hatch_height_tl {\tl_set:Nn \l_vbsurface_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurface_hatch_height_tl}
+            
+            
+            \shade[#2] (#4) rectangle ($(#5)+(0, -\HH)$);
+            \draw[#2, thick] (#4) -- (#5)#6
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurface } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurface_hatch_height_tl {\tl_set:Nn \l_vbsurface_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurface_hatch_height_tl}
+            
+            
+            \fill[pattern=north~east~lines, #2] (#4) rectangle ($(#5)+(0, -\HH)$);
+            \draw[#2, thick] (#4) -- (#5)#6
+        \group_end:
+    }
+}
+
+
+
+%% VBSURFACELU %%
+
+\keys_define:nn { vbsurfacelu }
+{
+    hatch_height .tl_set:N = \l_vbsurfacelu_hatch_height_tl,
+
+}
+
+\NewDocumentCommand{\vbsurfacelu}{s O{} O{} r() r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurfacelu } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacelu_hatch_height_tl {\tl_set:Nn \l_vbsurfacelu_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacelu_hatch_height_tl}
+            
+            
+            \shade[#2, shading~angle=-90] (#4) --(#5)--++(-\HH, -\HH)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+            \shade[#2] (#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)-(\HH, 0)$)--cycle;
+            \draw[thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurfacelu } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacelu_hatch_height_tl {\tl_set:Nn \l_vbsurfacelu_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacelu_hatch_height_tl}
+            
+            
+            \fill[pattern=north~east~lines, #2] (#4) --(#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)-(\HH, 0)$)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+            \draw[#2, thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }
+}
+
+
+%% VBSURFACERU %% right up
+
+\keys_define:nn { vbsurfaceru }
+{
+    hatch_height .tl_set:N = \l_vbsurfaceru_hatch_height_tl,
+
+}
+
+\NewDocumentCommand{\vbsurfaceru}{s O{} O{} r() r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurfaceru } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfaceru_hatch_height_tl {\tl_set:Nn \l_vbsurfaceru_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfaceru_hatch_height_tl}
+            
+        
+            \shade[#2, shading~angle=90](#5)--(#6)--++(\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--cycle;
+            \shade[#2](#4)--(#5)--++(\HH, -\HH)--++($(#4)-(#5)-(\HH, 0)$)--cycle;
+            \draw[thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurfaceru } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfaceru_hatch_height_tl {\tl_set:Nn \l_vbsurfaceru_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfaceru_hatch_height_tl}
+            
+            
+            \fill[pattern=north~west~lines, #2] (#4) --(#5)--(#6)--++(\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--++($(#4)-(#5)-(\HH, 0)$)--cycle;
+            \draw[#2, thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }
+}
+
+
+%% VBSURFACERD %% right down
+
+\keys_define:nn { vbsurfacerd }
+{
+    hatch_height .tl_set:N = \l_vbsurfacerd_hatch_height_tl,
+
+}
+
+\NewDocumentCommand{\vbsurfacerd}{s O{} O{} r() r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurfacerd } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacerd_hatch_height_tl {\tl_set:Nn \l_vbsurfacerd_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacerd_hatch_height_tl}
+            
+        
+            \shade[#2, shading~angle=-90](#5)--(#6)--++(-\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--cycle;
+            \shade[#2](#4)--(#5)--++(-\HH, -\HH)--++($(#4)-(#5)+(\HH, 0)$)--cycle;
+            \draw[thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurfacerd } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacerd_hatch_height_tl {\tl_set:Nn \l_vbsurfacerd_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacerd_hatch_height_tl}
+            
+            
+            \fill[pattern=north~west~lines, #2] (#4) --(#5)--(#6)--++(-\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--++($(#4)-(#5)+(\HH, 0)$)--cycle;
+            \draw[#2, thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }
+}
+
+
+%% VBSURFACELU %%
+
+\keys_define:nn { vbsurfaceld }
+{
+    hatch_height .tl_set:N = \l_vbsurfaceld_hatch_height_tl,
+
+}
+
+\NewDocumentCommand{\vbsurfaceld}{s O{} O{} r() r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurfaceld } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfaceld_hatch_height_tl {\tl_set:Nn \l_vbsurfaceld_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfaceld_hatch_height_tl}
+            
+            
+            \shade[#2, shading~angle=90] (#4) --(#5)--++(\HH, -\HH)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+            \shade[#2] (#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)+(\HH, 0)$)--cycle;
+            \draw[thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurfaceld } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfaceld_hatch_height_tl {\tl_set:Nn \l_vbsurfaceld_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfaceld_hatch_height_tl}
+            
+            
+            \fill[pattern=north~east~lines, #2] (#4) --(#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)+(\HH, 0)$)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+            \draw[#2, thick] (#4) -- (#5)--(#6) #7
+        \group_end:
+    }
+}
+
+
+%% VBSURFACELU %%
+
+% \keys_define:nn { vbsurfacelu }
+% {
+%     hatch_height .tl_set:N = \l_vbsurfacelu_hatch_height_tl,
+
+% }
+
+% \NewDocumentCommand{\vbsurfacelu}{s O{} O{} r() r() r() O{;}}
+% {
+%     \IfBooleanTF{#1}{
+%         \group_begin:
+%             \keys_set:nn { vbsurfacelu } {
+%                 hatch_height = 0.2,
+%                 #3
+%             }
+%             \tl_if_empty:NTF \l_vbsurfacelu_hatch_height_tl {\tl_set:Nn \l_vbsurfacelu_hatch_height_tl {0.2}}
+
+%             \def\HH{\l_vbsurfacelu_hatch_height_tl}
+            
+            
+%             \shade[#2, shading~angle=-90] (#4) --(#5)--++(-\HH, -\HH)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+%             \shade[#2] (#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)-(\HH, 0)$)--cycle;
+%             \draw[thick] (#4) -- (#5)--(#6)#7
+%         \group_end:
+%     }{
+%         \group_begin:
+%             \keys_set:nn { vbsurfacelu } {
+%                 hatch_height = 0.2,
+%                 #3
+%             }
+%             \tl_if_empty:NTF \l_vbsurfacelu_hatch_height_tl {\tl_set:Nn \l_vbsurfacelu_hatch_height_tl {0.2}}
+
+%             \def\HH{\l_vbsurfacelu_hatch_height_tl}
+            
+            
+%             \fill[pattern=north~east~lines, #2] (#4) --(#5)--(#6)--++(0, -\HH)--++($(#5)-(#6)-(\HH, 0)$)--++($(#4)-(#5)+(0, \HH)$)--cycle;
+%             \draw[#2, thick] (#4) -- (#5)--(#6)#7
+%         \group_end:
+%     }
+% }
+
+
+
+%% VBSURFACESPRINGRAMP %% right down
+
+\keys_define:nn { vbsurfacespringramp }
+{
+    hatch_height .tl_set:N = \l_vbsurfacespringramp_hatch_height_tl,
+}
+
+\NewDocumentCommand{\vbsurfacespringramp}{s O{} O{} r() r() r() O{;}}
+{
+    \IfBooleanTF{#1}{
+        \group_begin:
+            \keys_set:nn { vbsurfacespringramp } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacespringramp_hatch_height_tl {\tl_set:Nn \l_vbsurfacespringramp_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacespringramp_hatch_height_tl}
+            
+            \shade[#2, shading angle=-90](#5)--(#6)--++(-\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--cycle;
+            \shade[#2](#4)--(#5)--++(-\HH, -\HH)--++($(#4)-(#5)+(\HH, 0)$)--cycle;
+            \draw[thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }{
+        \group_begin:
+            \keys_set:nn { vbsurfacespringramp } {
+                hatch_height = 0.2,
+                #3
+            }
+            \tl_if_empty:NTF \l_vbsurfacespringramp_hatch_height_tl {\tl_set:Nn \l_vbsurfacespringramp_hatch_height_tl {0.2}}
+
+            \def\HH{\l_vbsurfacespringramp_hatch_height_tl}
+            
+            \fill[pattern=north~west~lines, #2] (#4) --(#5)--(#6)--++(-\HH, 0)--++($(#5)-(#6)-(0, \HH)$)--++($(#4)-(#5)+(\HH, 0)$)--cycle;
+            \draw[#2, thick] (#4) -- (#5)--(#6)#7
+        \group_end:
+    }
+}
+
+
+\keys_define:nn { vbwedge } {
+   name .tl_set:N = \l_vbwedge_name_tl,
+   base_angle_left .tl_set:N = \l_vbwedge_base_angle_left_tl,
+   base_angle_right .tl_set:N = \l_vbwedge_base_angle_right_tl,
+   mass .tl_set:N = \l_vbwedge_mass_tl,
+
+
+}
+
+% Define a command to draw the custom wedge shape
+\NewDocumentCommand{\vbwedge}{ O{} O{} r() r()}{
+   \group_begin:
+       \keys_set:nn { vbwedge } { 
+               name = wedge,
+               base_angle_left = 37,
+               base_angle_right = 90,
+               mass = $M$,
+               #2
+       }
+       % \tl_if_empty:NTF \l_vbwedge_name_tl {\tl_set:Nn \l_vbwedge_name_tl {wedge}} % seting default name=wedge
+      
+      
+       \tzgetxyval(#3){\a_x}{\a_y}
+       \tzgetxyval(#4){\b_x}{\b_y}
+
+       
+       \coordinate (\l_vbwedge_name_tl-base_left) at (#3);
+       \coordinate (\l_vbwedge_name_tl-base_right) at (#4);
+       
+       \pgfmathsetmacro{\base_length}{veclen(\b_x-\a_x, \b_y-\a_y)}
+       \pgfmathsetmacro{\left_side_length}{\base_length * sin(\l_vbwedge_base_angle_right_tl) / sin(\l_vbwedge_base_angle_left_tl + \l_vbwedge_base_angle_right_tl)}
+
+       \coordinate (\l_vbwedge_name_tl-base_left) at (#3);
+       \coordinate (\l_vbwedge_name_tl-base_right) at (#4);
+
+       
+       \pgfmathsetmacro{\rel_top_x}{\left_side_length * cos(\l_vbwedge_base_angle_left_tl)}
+       \pgfmathsetmacro{\rel_top_y}{\left_side_length * sin(\l_vbwedge_base_angle_left_tl)}
+
+       \coordinate (\l_vbwedge_name_tl-top) at ($(#3)+(\rel_top_x, \rel_top_y)$);
+       
+       \coordinate (\l_vbwedge_name_tl-center) at ($(#3)!.5!(\l_vbwedge_name_tl-top)$);
+       
+
+       \draw[#1] (\l_vbwedge_name_tl-top) -- (\l_vbwedge_name_tl-base_left) -- (\l_vbwedge_name_tl-base_right) -- cycle;
+
+    %    \tzanglemark[->](#4)(#3)(\l_vbwedge_name_tl-top){$\l_vbwedge_base_angle_left_tl^\circ$}(15pt)
+
+       \int_compare:nNnTF {\l_vbwedge_base_angle_right_tl} = {90}
+           {
+           \tzrightanglemark(#3)(#4)(\l_vbwedge_name_tl-top){}
+           }
+           {
+           \tzanglemark[->](#3)(#4)(\l_vbwedge_name_tl-top){$\l_vbwedge_base_angle_right_tl^\circ$}(15pt)
+           }
+
+       \node at ($($(#3)!0.5!(#4)$)!0.4!(\l_vbwedge_name_tl-top)$){\l_vbwedge_mass_tl};
+
+       % \node at (2, -3) {\l_vbwedge_base_angle_left_tl, \l_vbwedge_base_angle_right_tl, \l_vbwedge_name_tl, \base_length, \left_side_length};
+
+   \group_end:
+}
+
+\ExplSyntaxOff
+
+\endinput
