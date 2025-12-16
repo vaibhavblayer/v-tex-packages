@@ -3,7 +3,7 @@
 \RequirePackage{tikz}
 \RequirePackage{xparse}
 \usetikzlibrary{fadings}
-\RequirePackage{v-tzplot}
+\RequirePackage{tzplot}
 
 \ExplSyntaxOn
 
@@ -324,6 +324,7 @@
                base_angle_left = 37,
                base_angle_right = 90,
                mass = $M$,
+               node_angle = $\theta$,
                #2
        }
        % \tl_if_empty:NTF \l_vbwedge_name_tl {\tl_set:Nn \l_vbwedge_name_tl {wedge}} % seting default name=wedge
@@ -353,14 +354,14 @@
 
        \draw[#1] (\l_vbwedge_name_tl-top) -- (\l_vbwedge_name_tl-base_left) -- (\l_vbwedge_name_tl-base_right) -- cycle;
 
-    %    \tzanglemark[->](#4)(#3)(\l_vbwedge_name_tl-top){$\l_vbwedge_base_angle_left_tl^\circ$}(15pt)
+       \tzanglemark[->](#4)(#3)(\l_vbwedge_name_tl-top){\l_vbwedge_node_angle_tl}(15pt)
 
        \int_compare:nNnTF {\l_vbwedge_base_angle_right_tl} = {90}
            {
            \tzrightanglemark(#3)(#4)(\l_vbwedge_name_tl-top){}
            }
            {
-           \tzanglemark[->](#3)(#4)(\l_vbwedge_name_tl-top){$\l_vbwedge_base_angle_right_tl^\circ$}(15pt)
+           \tzanglemark[->](#3)(#4)(\l_vbwedge_name_tl-top){\l_vbwedge_base_angle_right_tl^\circ$}(15pt)
            }
 
        \node at ($($(#3)!0.5!(#4)$)!0.4!(\l_vbwedge_name_tl-top)$){\l_vbwedge_mass_tl};
@@ -368,6 +369,14 @@
        % \node at (2, -3) {\l_vbwedge_base_angle_left_tl, \l_vbwedge_base_angle_right_tl, \l_vbwedge_name_tl, \base_length, \left_side_length};
 
    \group_end:
+}
+
+\keys_define:nn { vbwedge } {
+    name .tl_set:N = \l_vbwedge_name_tl,
+    base_angle_left .tl_set:N = \l_vbwedge_base_angle_left_tl,
+    base_angle_right .tl_set:N = \l_vbwedge_base_angle_right_tl,
+    mass .tl_set:N = \l_vbwedge_mass_tl,
+    node_angle .tl_set:N = \l_vbwedge_node_angle_tl,
 }
 
 \ExplSyntaxOff
